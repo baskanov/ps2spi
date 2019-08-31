@@ -1,9 +1,9 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-#include "../../ps2spi/keyboard.h"
-#include "../ps2_mock/ps2_mock.h"
-#include "../../common/ps2_keyboard_codes_enum.h"
+#include <keyboard/keyboard.h>
+#include <ps2_mock/ps2_mock.h>
+#include <ps2spi/ps2_keyboard_codes_enum.h>
 
 static void test_bat(void)
 {

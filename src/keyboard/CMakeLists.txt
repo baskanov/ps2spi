@@ -13,4 +13,4 @@ target_compile_options(keyboard_test PRIVATE -mmcu=atmega16a -pedantic -Wall -We
 target_compile_features(keyboard_test PRIVATE c_std_90)
 set_target_properties(keyboard_test PROPERTIES LINK_FLAGS -mmcu=atmega16a)
 target_include_directories(keyboard_test PRIVATE include)
-target_link_libraries(keyboard_test PRIVATE ps2_mock)
+target_link_libraries(keyboard_test PRIVATE ps2spi_interface ps2_mock)
