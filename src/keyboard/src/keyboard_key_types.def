@@ -1,0 +1,27 @@
+/* 0: B        */
+/* 1: B        */
+/* 2: BLRN     */
+/* 3: BLR      */
+/* 4: BCAS     */
+/* 5: BC       */
+
+/*    BCAS     */
+/*    ALRN     */
+
+/*                                                                      Mask 0       Mask 1      Selector                        */
+/*              Name                   Modifier                       Br Ct Al Sh  Al LS RS NL  Set 1  Set 2                     */
+DEFINE_KEY_TYPE(KEY_TYPE_NONE,         0,                             0, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_EMPTY             )
+DEFINE_KEY_TYPE(KEY_TYPE_NORMAL,       0,                             1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_E0,           0,                             1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_E0_GRAY_SLASH)
+DEFINE_KEY_TYPE(KEY_TYPE_GRAY,         0,                             1, 0, 0, 0,  0, 1, 1, 1,   0,    SELECTOR_SET2_E0_GRAY_SLASH)
+DEFINE_KEY_TYPE(KEY_TYPE_KEYPAD_SLASH, 0,                             1, 0, 0, 0,  0, 1, 1, 0,   0,    SELECTOR_SET2_E0_GRAY_SLASH)
+DEFINE_KEY_TYPE(KEY_TYPE_PRINT_SCREEN, 0,                             1, 1, 1, 1,  0, 0, 0, 0,   0,    SELECTOR_SET2_PRINT_SCREEN )
+DEFINE_KEY_TYPE(KEY_TYPE_PAUSE,        0,                             1, 1, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_PAUSE        )
+DEFINE_KEY_TYPE(KEY_TYPE_LEFT_SHIFT,   KEYBOARD_MODIFIER_LEFT_SHIFT,  1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_RIGHT_SHIFT,  KEYBOARD_MODIFIER_RIGHT_SHIFT, 1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_LEFT_CTRL,    KEYBOARD_MODIFIER_LEFT_CTRL,   1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_RIGHT_CTRL,   KEYBOARD_MODIFIER_RIGHT_CTRL,  1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_E0_GRAY_SLASH)
+DEFINE_KEY_TYPE(KEY_TYPE_LEFT_ALT,     KEYBOARD_MODIFIER_LEFT_ALT,    1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_RIGHT_ALT,    KEYBOARD_MODIFIER_RIGHT_ALT,   1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_E0_GRAY_SLASH)
+DEFINE_KEY_TYPE(KEY_TYPE_NUM_LOCK,     KEYBOARD_MODIFIER_NUM_LOCK,    1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_SET2_NORMAL       )
+DEFINE_KEY_TYPE(KEY_TYPE_LANG,         0,                             1, 0, 0, 0,  0, 0, 0, 0,   0,    SELECTOR_NO_BREAK          )

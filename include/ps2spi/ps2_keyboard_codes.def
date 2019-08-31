@@ -1,0 +1,153 @@
+/*                      Key Name              Type                   Set 1  Set 2 */
+PS2_KEYBOARD_DEFINE_KEY(KEY_RESERVED,         KEY_TYPE_NONE,         0x00,  0x00,
+                        KEY_POWER,            KEY_TYPE_E0,           0x5e,  0x37)
+PS2_KEYBOARD_DEFINE_KEY(KEY_SLEEP,            KEY_TYPE_E0,           0x5f,  0x3f,
+                        KEY_WAKEUP,           KEY_TYPE_E0,           0x63,  0x5e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_A,                KEY_TYPE_NORMAL,       0x1e,  0x1c,
+                        KEY_B,                KEY_TYPE_NORMAL,       0x30,  0x32)
+PS2_KEYBOARD_DEFINE_KEY(KEY_C,                KEY_TYPE_NORMAL,       0x2e,  0x21,
+                        KEY_D,                KEY_TYPE_NORMAL,       0x20,  0x23)
+PS2_KEYBOARD_DEFINE_KEY(KEY_E,                KEY_TYPE_NORMAL,       0x12,  0x24,
+                        KEY_F,                KEY_TYPE_NORMAL,       0x21,  0x2b)
+PS2_KEYBOARD_DEFINE_KEY(KEY_G,                KEY_TYPE_NORMAL,       0x22,  0x34,
+                        KEY_H,                KEY_TYPE_NORMAL,       0x23,  0x33)
+PS2_KEYBOARD_DEFINE_KEY(KEY_I,                KEY_TYPE_NORMAL,       0x17,  0x43,
+                        KEY_J,                KEY_TYPE_NORMAL,       0x24,  0x3b)
+PS2_KEYBOARD_DEFINE_KEY(KEY_K,                KEY_TYPE_NORMAL,       0x25,  0x42,
+                        KEY_L,                KEY_TYPE_NORMAL,       0x26,  0x4b)
+PS2_KEYBOARD_DEFINE_KEY(KEY_M,                KEY_TYPE_NORMAL,       0x32,  0x3a,
+                        KEY_N,                KEY_TYPE_NORMAL,       0x31,  0x31)
+PS2_KEYBOARD_DEFINE_KEY(KEY_O,                KEY_TYPE_NORMAL,       0x18,  0x44,
+                        KEY_P,                KEY_TYPE_NORMAL,       0x19,  0x4d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_Q,                KEY_TYPE_NORMAL,       0x10,  0x15,
+                        KEY_R,                KEY_TYPE_NORMAL,       0x13,  0x2d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_S,                KEY_TYPE_NORMAL,       0x1f,  0x1b,
+                        KEY_T,                KEY_TYPE_NORMAL,       0x14,  0x2c)
+PS2_KEYBOARD_DEFINE_KEY(KEY_U,                KEY_TYPE_NORMAL,       0x16,  0x3c,
+                        KEY_V,                KEY_TYPE_NORMAL,       0x2f,  0x2a)
+PS2_KEYBOARD_DEFINE_KEY(KEY_W,                KEY_TYPE_NORMAL,       0x11,  0x1d,
+                        KEY_X,                KEY_TYPE_NORMAL,       0x2d,  0x22)
+PS2_KEYBOARD_DEFINE_KEY(KEY_Y,                KEY_TYPE_NORMAL,       0x15,  0x35,
+                        KEY_Z,                KEY_TYPE_NORMAL,       0x2c,  0x1a)
+PS2_KEYBOARD_DEFINE_KEY(KEY_1,                KEY_TYPE_NORMAL,       0x02,  0x16,
+                        KEY_2,                KEY_TYPE_NORMAL,       0x03,  0x1e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_3,                KEY_TYPE_NORMAL,       0x04,  0x26,
+                        KEY_4,                KEY_TYPE_NORMAL,       0x05,  0x25)
+PS2_KEYBOARD_DEFINE_KEY(KEY_5,                KEY_TYPE_NORMAL,       0x06,  0x2e,
+                        KEY_6,                KEY_TYPE_NORMAL,       0x07,  0x36)
+PS2_KEYBOARD_DEFINE_KEY(KEY_7,                KEY_TYPE_NORMAL,       0x08,  0x3d,
+                        KEY_8,                KEY_TYPE_NORMAL,       0x09,  0x3e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_9,                KEY_TYPE_NORMAL,       0x0a,  0x46,
+                        KEY_0,                KEY_TYPE_NORMAL,       0x0b,  0x45)
+PS2_KEYBOARD_DEFINE_KEY(KEY_ENTER,            KEY_TYPE_NORMAL,       0x1c,  0x5a,
+                        KEY_ESC,              KEY_TYPE_NORMAL,       0x01,  0x76)
+PS2_KEYBOARD_DEFINE_KEY(KEY_BACKSPACE,        KEY_TYPE_NORMAL,       0x0e,  0x66,
+                        KEY_TAB,              KEY_TYPE_NORMAL,       0x0f,  0x0d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_SPACE,            KEY_TYPE_NORMAL,       0x39,  0x29,
+                        KEY_MINUS,            KEY_TYPE_NORMAL,       0x0c,  0x4e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_EQUAL,            KEY_TYPE_NORMAL,       0x0d,  0x55,
+                        KEY_LEFTBRACE,        KEY_TYPE_NORMAL,       0x1a,  0x54)
+PS2_KEYBOARD_DEFINE_KEY(KEY_RIGHTBRACE,       KEY_TYPE_NORMAL,       0x1b,  0x5b,
+                        KEY_BACKSLASH,        KEY_TYPE_NORMAL,       0x2b,  0x5d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_102ND,            KEY_TYPE_NORMAL,       0x2b,  0x5d,
+                        KEY_SEMICOLON,        KEY_TYPE_NORMAL,       0x27,  0x4c)
+PS2_KEYBOARD_DEFINE_KEY(KEY_APOSTROPHE,       KEY_TYPE_NORMAL,       0x28,  0x52,
+                        KEY_GRAVE,            KEY_TYPE_NORMAL,       0x29,  0x0e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_COMMA,            KEY_TYPE_NORMAL,       0x33,  0x41,
+                        KEY_DOT,              KEY_TYPE_NORMAL,       0x34,  0x49)
+PS2_KEYBOARD_DEFINE_KEY(KEY_SLASH,            KEY_TYPE_NORMAL,       0x35,  0x4a,
+                        KEY_CAPSLOCK,         KEY_TYPE_NORMAL,       0x3a,  0x58)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F1,               KEY_TYPE_NORMAL,       0x3b,  0x05,
+                        KEY_F2,               KEY_TYPE_NORMAL,       0x3c,  0x06)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F3,               KEY_TYPE_NORMAL,       0x3d,  0x04,
+                        KEY_F4,               KEY_TYPE_NORMAL,       0x3e,  0x0c)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F5,               KEY_TYPE_NORMAL,       0x3f,  0x03,
+                        KEY_F6,               KEY_TYPE_NORMAL,       0x40,  0x0b)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F7,               KEY_TYPE_NORMAL,       0x41,  0x83,
+                        KEY_F8,               KEY_TYPE_NORMAL,       0x42,  0x0a)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F9,               KEY_TYPE_NORMAL,       0x43,  0x01,
+                        KEY_F10,              KEY_TYPE_NORMAL,       0x44,  0x09)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F11,              KEY_TYPE_NORMAL,       0x57,  0x78,
+                        KEY_F12,              KEY_TYPE_NORMAL,       0x58,  0x07)
+PS2_KEYBOARD_DEFINE_KEY(KEY_SYSRQ,            KEY_TYPE_PRINT_SCREEN, 0x00,  0x00,
+                        KEY_SCROLLLOCK,       KEY_TYPE_NORMAL,       0x46,  0x7e)
+PS2_KEYBOARD_DEFINE_KEY(KEY_PAUSE,            KEY_TYPE_PAUSE,        0x00,  0x00,
+                        KEY_INSERT,           KEY_TYPE_GRAY,         0x52,  0x70)
+PS2_KEYBOARD_DEFINE_KEY(KEY_HOME,             KEY_TYPE_GRAY,         0x47,  0x6c,
+                        KEY_PAGEUP,           KEY_TYPE_GRAY,         0x49,  0x7d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_DELETE,           KEY_TYPE_GRAY,         0x53,  0x71,
+                        KEY_END,              KEY_TYPE_GRAY,         0x4f,  0x69)
+PS2_KEYBOARD_DEFINE_KEY(KEY_PAGEDOWN,         KEY_TYPE_GRAY,         0x51,  0x7a,
+                        KEY_RIGHT,            KEY_TYPE_GRAY,         0x4d,  0x74)
+PS2_KEYBOARD_DEFINE_KEY(KEY_LEFT,             KEY_TYPE_GRAY,         0x4b,  0x6b,
+                        KEY_DOWN,             KEY_TYPE_GRAY,         0x50,  0x72)
+PS2_KEYBOARD_DEFINE_KEY(KEY_UP,               KEY_TYPE_GRAY,         0x48,  0x75,
+                        KEY_NUMLOCK,          KEY_TYPE_NUM_LOCK,     0x45,  0x77)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KPSLASH,          KEY_TYPE_KEYPAD_SLASH, 0x35,  0x4a,
+                        KEY_KPASTERISK,       KEY_TYPE_NORMAL,       0x37,  0x7c)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KPMINUS,          KEY_TYPE_NORMAL,       0x4a,  0x7b,
+                        KEY_KPPLUS,           KEY_TYPE_NORMAL,       0x4e,  0x79)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KPENTER,          KEY_TYPE_E0,           0x1c,  0x5a,
+                        KEY_KP1,              KEY_TYPE_NORMAL,       0x4f,  0x69)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KP2,              KEY_TYPE_NORMAL,       0x50,  0x72,
+                        KEY_KP3,              KEY_TYPE_NORMAL,       0x51,  0x7a)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KP4,              KEY_TYPE_NORMAL,       0x4b,  0x6b,
+                        KEY_KP5,              KEY_TYPE_NORMAL,       0x4c,  0x73)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KP6,              KEY_TYPE_NORMAL,       0x4d,  0x74,
+                        KEY_KP7,              KEY_TYPE_NORMAL,       0x47,  0x6c)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KP8,              KEY_TYPE_NORMAL,       0x48,  0x75,
+                        KEY_KP9,              KEY_TYPE_NORMAL,       0x49,  0x7d)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KP0,              KEY_TYPE_NORMAL,       0x52,  0x70,
+                        KEY_KPDOT,            KEY_TYPE_NORMAL,       0x53,  0x71)
+PS2_KEYBOARD_DEFINE_KEY(KEY_COMPOSE,          KEY_TYPE_E0,           0x5d,  0x2f,
+                        KEY_KPEQUAL,          KEY_TYPE_NORMAL,       0x59,  0x0f)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F13,              KEY_TYPE_NORMAL,       0x64,  0x08,
+                        KEY_F14,              KEY_TYPE_NORMAL,       0x65,  0x10)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F15,              KEY_TYPE_NORMAL,       0x66,  0x18,
+                        KEY_F16,              KEY_TYPE_NORMAL,       0x67,  0x20)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F17,              KEY_TYPE_NORMAL,       0x68,  0x28,
+                        KEY_F18,              KEY_TYPE_NORMAL,       0x69,  0x30)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F19,              KEY_TYPE_NORMAL,       0x6a,  0x38,
+                        KEY_F20,              KEY_TYPE_NORMAL,       0x6b,  0x40)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F21,              KEY_TYPE_NORMAL,       0x6c,  0x48,
+                        KEY_F22,              KEY_TYPE_NORMAL,       0x6d,  0x50)
+PS2_KEYBOARD_DEFINE_KEY(KEY_F23,              KEY_TYPE_NORMAL,       0x6e,  0x57,
+                        KEY_F24,              KEY_TYPE_NORMAL,       0x76,  0x5f)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KPCOMMA,          KEY_TYPE_NORMAL,       0x7e,  0x6d,
+                        KEY_RO,               KEY_TYPE_NORMAL,       0x73,  0x51)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KATAKANAHIRAGANA, KEY_TYPE_NORMAL,       0x70,  0x13,
+                        KEY_YEN,              KEY_TYPE_NORMAL,       0x7d,  0x6a)
+PS2_KEYBOARD_DEFINE_KEY(KEY_HENKAN,           KEY_TYPE_NORMAL,       0x79,  0x64,
+                        KEY_MUHENKAN,         KEY_TYPE_NORMAL,       0x7b,  0x67)
+PS2_KEYBOARD_DEFINE_KEY(KEY_KPJPCOMMA,        KEY_TYPE_NORMAL,       0x5c,  0x27,
+                        KEY_HANGUEL,          KEY_TYPE_LANG,         0xf2,  0xf2)
+PS2_KEYBOARD_DEFINE_KEY(KEY_HANJA,            KEY_TYPE_LANG,         0xf1,  0xf1,
+                        KEY_KATAKANA,         KEY_TYPE_NORMAL,       0x78,  0x63)
+PS2_KEYBOARD_DEFINE_KEY(KEY_HIRAGANA,         KEY_TYPE_NORMAL,       0x77,  0x62,
+                        KEY_ZENKAKUHANKAKU,   KEY_TYPE_NORMAL,       0x76,  0x5f)
+PS2_KEYBOARD_DEFINE_KEY(KEY_LEFTCTRL,         KEY_TYPE_LEFT_CTRL,    0x1d,  0x14,
+                        KEY_LEFTSHIFT,        KEY_TYPE_LEFT_SHIFT,   0x2a,  0x12)
+PS2_KEYBOARD_DEFINE_KEY(KEY_LEFTALT,          KEY_TYPE_LEFT_ALT,     0x38,  0x11,
+                        KEY_LEFTMETA,         KEY_TYPE_E0,           0x5b,  0x1f)
+PS2_KEYBOARD_DEFINE_KEY(KEY_RIGHTCTRL,        KEY_TYPE_RIGHT_CTRL,   0x1d,  0x14,
+                        KEY_RIGHTSHIFT,       KEY_TYPE_RIGHT_SHIFT,  0x36,  0x59)
+PS2_KEYBOARD_DEFINE_KEY(KEY_RIGHTALT,         KEY_TYPE_RIGHT_ALT,    0x38,  0x11,
+                        KEY_RIGHTMETA,        KEY_TYPE_E0,           0x5c,  0x27)
+PS2_KEYBOARD_DEFINE_KEY(KEY_NEXTSONG,         KEY_TYPE_E0,           0x19,  0x4d,
+                        KEY_PREVIOUSSONG,     KEY_TYPE_E0,           0x10,  0x15)
+PS2_KEYBOARD_DEFINE_KEY(KEY_STOPCD,           KEY_TYPE_E0,           0x24,  0x3b,
+                        KEY_PLAYPAUSE,        KEY_TYPE_E0,           0x22,  0x34)
+PS2_KEYBOARD_DEFINE_KEY(KEY_MUTE,             KEY_TYPE_E0,           0x20,  0x23,
+                        KEY_VOLUMEUP,         KEY_TYPE_E0,           0x30,  0x32)
+PS2_KEYBOARD_DEFINE_KEY(KEY_VOLUMEDOWN,       KEY_TYPE_E0,           0x2e,  0x21,
+                        KEY_MEDIA,            KEY_TYPE_E0,           0x6d,  0x50)
+PS2_KEYBOARD_DEFINE_KEY(KEY_MAIL,             KEY_TYPE_E0,           0x6c,  0x48,
+                        KEY_CALC,             KEY_TYPE_E0,           0x21,  0x2b)
+PS2_KEYBOARD_DEFINE_KEY(KEY_COMPUTER,         KEY_TYPE_E0,           0x6b,  0x40,
+                        KEY_FIND,             KEY_TYPE_E0,           0x65,  0x10)
+PS2_KEYBOARD_DEFINE_KEY(KEY_HOMEPAGE,         KEY_TYPE_E0,           0x32,  0x3a,
+                        KEY_BACK,             KEY_TYPE_E0,           0x6a,  0x38)
+PS2_KEYBOARD_DEFINE_KEY(KEY_FORWARD,          KEY_TYPE_E0,           0x69,  0x30,
+                        KEY_STOP,             KEY_TYPE_E0,           0x68,  0x28)
+PS2_KEYBOARD_DEFINE_KEY(KEY_REFRESH,          KEY_TYPE_E0,           0x67,  0x20,
+                        KEY_FAVORITES,        KEY_TYPE_E0,           0x66,  0x18)

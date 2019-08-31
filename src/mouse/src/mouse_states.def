@@ -1,0 +1,38 @@
+/*           Name                                Next State                          Parm Proc Receive                */
+DEFINE_STATE(STATE_SET_SCALING_1_1,              STATE_IDLE,                         0x00, set_scaling_proc,          0) /* (0xe6) */
+DEFINE_STATE(STATE_SET_SCALING_2_1,              STATE_IDLE,                         0x01, set_scaling_proc,          0) /* (0xe7) */
+DEFINE_STATE(STATE_SET_RESOLUTION,               STATE_SET_RESOLUTION_OPTION_BYTE,   0xfa, send_byte_proc,            0) /* (0xe8) */
+DEFINE_STATE(STATE_STATUS_REQUEST,               STATE_STATUS_REQUEST_STATUS_PACKET, 0xfa, send_byte_proc,            0) /* (0xe9) */
+DEFINE_STATE(STATE_SET_STREAM_MODE,              STATE_IDLE,                         0x00, set_mode_proc,             0) /* (0xea) */
+DEFINE_STATE(STATE_READ_DATA,                    STATE_READ_DATA_DATA_PACKET,        0xfa, send_byte_proc,            0) /* (0xeb) */
+DEFINE_STATE(STATE_CLEAR_ECHO_MODE,              STATE_IDLE,                         0x00, set_echo_mode_proc,        0) /* (0xec) */
+DEFINE_STATE(STATE_INVALID_COMMAND_0,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xed) */
+DEFINE_STATE(STATE_SET_ECHO_MODE,                STATE_ECHO_IDLE,                    0x01, set_echo_mode_proc,        0) /* (0xee) */
+DEFINE_STATE(STATE_INVALID_COMMAND_1,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xef) */
+DEFINE_STATE(STATE_SET_REMOTE_MODE,              STATE_IDLE,                         0x01, set_mode_proc,             0) /* (0xf0) */
+DEFINE_STATE(STATE_INVALID_COMMAND_2,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xf1) */
+DEFINE_STATE(STATE_READ_ID,                      STATE_READ_ID_ID_BYTE,              0xfa, send_byte_proc,            0) /* (0xf2) */
+DEFINE_STATE(STATE_SET_SAMPLE_RATE,              STATE_SET_SAMPLE_RATE_OPTION_BYTE,  0xfa, send_byte_proc,            0) /* (0xf3) */
+DEFINE_STATE(STATE_ENABLE,                       STATE_IDLE,                         0x01, set_enabled_proc,          0) /* (0xf4) */
+DEFINE_STATE(STATE_DISABLE,                      STATE_IDLE,                         0x00, set_enabled_proc,          0) /* (0xf5) */
+DEFINE_STATE(STATE_SET_DEFAULTS,                 STATE_IDLE,                         0x00, set_defaults_proc,         0) /* (0xf6) */
+DEFINE_STATE(STATE_INVALID_COMMAND_3,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xf7) */
+DEFINE_STATE(STATE_INVALID_COMMAND_4,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xf8) */
+DEFINE_STATE(STATE_INVALID_COMMAND_5,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xf9) */
+DEFINE_STATE(STATE_INVALID_COMMAND_6,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xfa) */
+DEFINE_STATE(STATE_INVALID_COMMAND_7,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xfb) */
+DEFINE_STATE(STATE_INVALID_COMMAND_8,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xfc) */
+DEFINE_STATE(STATE_INVALID_COMMAND_9,            STATE_IDLE,                         0xfe, send_byte_proc,            0) /* (0xfd) */
+DEFINE_STATE(STATE_RESEND,                       STATE_SEND_PACKET_BYTE,             0x00, resend_proc,               0) /* (0xfe) */
+DEFINE_STATE(STATE_RESET,                        STATE_IDLE,                         0x00, reset_proc,                0) /* (0xff) */
+DEFINE_STATE(STATE_IDLE,                         STATE_IDLE,                         0x00, idle_proc,                 0)
+DEFINE_STATE(STATE_SEND_PACKET_BYTE,             STATE_IDLE,                         0x00, send_packet_byte_proc,     0)
+DEFINE_STATE(STATE_SEND_ACK,                     STATE_IDLE,                         0xfa, send_byte_proc,            0)
+DEFINE_STATE(STATE_SET_RESOLUTION_OPTION_BYTE,   STATE_SEND_ACK,                     0x00, set_resolution_proc,       1)
+DEFINE_STATE(STATE_STATUS_REQUEST_STATUS_PACKET, STATE_SEND_PACKET_BYTE,             0x00, send_status_proc,          0)
+DEFINE_STATE(STATE_READ_DATA_DATA_PACKET,        STATE_SEND_PACKET_BYTE,             0x00, send_movement_packet_proc, 0)
+DEFINE_STATE(STATE_READ_ID_ID_BYTE,              STATE_IDLE,                         0x00, send_id_proc,              0)
+DEFINE_STATE(STATE_SET_SAMPLE_RATE_OPTION_BYTE,  STATE_SEND_ACK,                     0x00, set_sample_rate_proc,      1)
+DEFINE_STATE(STATE_SEND_COMPLETION_CODE,         STATE_SEND_PACKET_BYTE,             0x00, send_completion_code_proc, 0)
+DEFINE_STATE(STATE_ECHO_IDLE,                    STATE_ECHO_IDLE,                    0x00, no_op_proc,                0)
+DEFINE_STATE(STATE_ECHO_SEND_BYTE,               STATE_ECHO_IDLE,                    0x00, echo_proc,                 0)

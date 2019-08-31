@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(avr-gdb) Launch Simulator",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "avr-gdb",
+            "setupCommands": [
+                {
+                    "description": "Specify the executable file",
+                    "text": "-file-exec-and-symbols ${command:cmake.launchTargetPath}",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Connect to a simulator",
+                    "text": "-target-select sim",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Loads the executable onto the remote target",
+                    "text": "-target-download",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

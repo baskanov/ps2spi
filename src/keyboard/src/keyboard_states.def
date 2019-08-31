@@ -1,0 +1,36 @@
+/*           Name                                        Next State                                  Parm  Proc                   Receive */
+DEFINE_STATE(STATE_SET_LEDS,                             STATE_SET_LEDS_OPTION_BYTE,                 0xfa, send_byte_proc,                0) /* (0xed) */
+DEFINE_STATE(STATE_ECHO,                                 STATE_SEND_BUFFER,                          0xee, send_byte_proc,                0) /* (0xee) */
+DEFINE_STATE(STATE_INVALID_COMMAND_0,                    STATE_SEND_BUFFER,                          0xfe, send_byte_no_store_proc,       0) /* (0xef) (this state is also used to NACK invalid input) */
+DEFINE_STATE(STATE_SET_SCANCODE_SET,                     STATE_SET_SCANCODE_SET_OPTION_BYTE,         0xfa, send_byte_proc,                0) /* (0xf0) */
+DEFINE_STATE(STATE_INVALID_COMMAND_1,                    STATE_SEND_BUFFER,                          0xfe, send_byte_no_store_proc,       0) /* (0xf1) */
+DEFINE_STATE(STATE_READ_ID,                              STATE_READ_ID_BYTE_0,                       0xfa, send_byte_proc,                0) /* (0xf2) */
+DEFINE_STATE(STATE_SET_TYPEMATIC_RATE_DELAY,             STATE_SET_TYPEMATIC_RATE_DELAY_OPTION_BYTE, 0xfa, send_byte_proc,                0) /* (0xf3) */
+DEFINE_STATE(STATE_ENABLE,                               STATE_SEND_BUFFER,                          0x00, enable_proc,                   0) /* (0xf4) */
+DEFINE_STATE(STATE_DEFAULT_DISABLE,                      STATE_SEND_BUFFER,                          0x00, set_default_proc,              0) /* (0xf5) */
+DEFINE_STATE(STATE_SET_DEFAULT,                          STATE_SEND_BUFFER,                          0x01, set_default_proc,              0) /* (0xf6) */
+DEFINE_STATE(STATE_SET_ALL_KEYS_TYPEMATIC,               STATE_SEND_BUFFER,                          0xfa, send_byte_proc,                0) /* (0xf7) */
+DEFINE_STATE(STATE_SET_ALL_KEYS_MAKE_BREAK,              STATE_SEND_BUFFER,                          0xfa, send_byte_proc,                0) /* (0xf8) */
+DEFINE_STATE(STATE_SET_ALL_KEYS_MAKE,                    STATE_SEND_BUFFER,                          0xfa, send_byte_proc,                0) /* (0xf9) */
+DEFINE_STATE(STATE_SET_ALL_KEYS_TYPEMATIC_MAKE_BREAK,    STATE_SEND_BUFFER,                          0xfa, send_byte_proc,                0) /* (0xfa) */
+DEFINE_STATE(STATE_SET_KEY_TYPE_TYPEMATIC,               STATE_SET_KEY_TYPE_TYPEMATIC_OPTION_BYTE,   0xfa, send_byte_proc,                0) /* (0xfb) */
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE_BREAK,              STATE_SET_KEY_TYPE_MAKE_BREAK_OPTION_BYTE,  0xfa, send_byte_proc,                0) /* (0xfc) */
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE,                    STATE_SET_KEY_TYPE_MAKE_OPTION_BYTE,        0xfa, send_byte_proc,                0) /* (0xfd) */
+DEFINE_STATE(STATE_RESEND,                               STATE_SEND_BUFFER,                          0x00, resend_proc,                   0) /* (0xfe) */
+DEFINE_STATE(STATE_RESET,                                STATE_RESET_WAIT,                           0x00, reset_proc,                    0) /* (0xff) */
+DEFINE_STATE(STATE_SEND_BUFFER,                          STATE_SEND_BUFFER,                          0x00, send_buffer_proc,              0)
+DEFINE_STATE(STATE_SEND_ACK,                             STATE_SEND_BUFFER,                          0xfa, send_byte_proc,                0)
+DEFINE_STATE(STATE_SET_LEDS_OPTION_BYTE,                 STATE_SEND_ACK,                             0x00, set_leds_proc,                 1)
+DEFINE_STATE(STATE_SET_SCANCODE_SET_OPTION_BYTE,         STATE_SEND_ACK,                             0x00, set_scancode_set_proc,         1)
+DEFINE_STATE(STATE_READ_ID_BYTE_0,                       STATE_READ_ID_BYTE_1,                       0xab, send_byte_proc,                0)
+DEFINE_STATE(STATE_READ_ID_BYTE_1,                       STATE_SEND_BUFFER,                          0x83, send_byte_proc,                0)
+DEFINE_STATE(STATE_SET_TYPEMATIC_RATE_DELAY_OPTION_BYTE, STATE_SEND_ACK,                             0x00, set_typematic_rate_delay_proc, 1)
+DEFINE_STATE(STATE_SET_KEY_TYPE_TYPEMATIC_OPTION_BYTE,   STATE_SET_KEY_TYPE_TYPEMATIC_ACK,           0x00, receive_option_byte_proc,      1)
+DEFINE_STATE(STATE_SET_KEY_TYPE_TYPEMATIC_ACK,           STATE_SET_KEY_TYPE_TYPEMATIC_OPTION_BYTE,   0xfa, send_byte_proc,                0)
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE_BREAK_OPTION_BYTE,  STATE_SET_KEY_TYPE_MAKE_BREAK_ACK,          0x00, receive_option_byte_proc,      1)
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE_BREAK_ACK,          STATE_SET_KEY_TYPE_MAKE_BREAK_OPTION_BYTE,  0xfa, send_byte_proc,                0)
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE_OPTION_BYTE,        STATE_SET_KEY_TYPE_MAKE_ACK,                0x00, receive_option_byte_proc,      1)
+DEFINE_STATE(STATE_SET_KEY_TYPE_MAKE_ACK,                STATE_SET_KEY_TYPE_MAKE_OPTION_BYTE,        0xfa, send_byte_proc,                0)
+DEFINE_STATE(STATE_RESET_WAIT,                           STATE_RESET_WAIT,                           0x00, reset_wait_proc,               0)
+DEFINE_STATE(STATE_SET_SCANCODE_SET_SEND_CURRENT,        STATE_SEND_BUFFER,                          0x00, send_scancode_set_proc,        0)
+DEFINE_STATE(STATE_SEND_BAT_SUCCESS,                     STATE_SEND_BUFFER,                          0xaa, send_byte_proc,                0)
