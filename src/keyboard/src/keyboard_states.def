@@ -1,3 +1,5 @@
+/* clang-format off */
+
 /*           Name                                        Next State                                  Parm  Proc                   Receive */
 DEFINE_STATE(STATE_SET_LEDS,                             STATE_SET_LEDS_OPTION_BYTE,                 0xfa, send_byte_proc,                0) /* (0xed) */
 DEFINE_STATE(STATE_ECHO,                                 STATE_SEND_BUFFER,                          0xee, send_byte_proc,                0) /* (0xee) */

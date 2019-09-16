@@ -47,6 +47,7 @@ void test_movement(void)
 	mouse_init(&mouse, 0x1, 0x2);
 	{
 		const Ps2MockExpectedCall expected_calls[] = {
+			/* clang-format off */
 			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
 			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
 			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
@@ -59,6 +60,7 @@ void test_movement(void)
 			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
 			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xfa }, { 1 } },
 			{ PS2_MOCK_END },
+			/* clang-format on */
 		};
 		ps2_mock_set_expected_calls(expected_calls);
 		mouse_work(&mouse, 0);
@@ -118,6 +120,7 @@ void test_echo(void)
 	mouse_init(&mouse, 0x1, 0x2);
 	{
 		const Ps2MockExpectedCall expected_calls[] = {
+			/* clang-format off */
 			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
 			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
 			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
@@ -130,6 +133,7 @@ void test_echo(void)
 			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
 			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xfa }, { 1 } },
 			{ PS2_MOCK_END },
+			/* clang-format on */
 		};
 		ps2_mock_set_expected_calls(expected_calls);
 		mouse_work(&mouse, 0);

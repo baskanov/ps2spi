@@ -86,10 +86,13 @@ void keyboard_init(Keyboard *const self, const unsigned char clock_mask, const u
 }
 
 static const unsigned char set2_scancodes[] PROGMEM = {
-#define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1) (set2_code0), (set2_code1),
+#define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1)            \
+	(set2_code0), (set2_code1),
 #include <ps2spi/ps2_keyboard_codes.def>
 #undef PS2_KEYBOARD_DEFINE_KEY
 };
+
+/* clang-format off */
 
 #define PACK_44(a, b) ((a) | ((b) << 4) | ((((a) > 0xf) || ((b) > 0xf)) ? 0x100 : 0))
 #define UNPACK_44_0(a) ((unsigned char)((a) & 0xf))
@@ -106,8 +109,11 @@ static const unsigned char set2_scancodes[] PROGMEM = {
 
 #define PACK_BITS(a, b, c, d, e, f, g, h) ((a) | ((b) << 1) | ((c) << 2) | ((d) << 3) | ((e) << 4) | ((f) << 5) | ((g) << 6) | ((h) << 7))
 
+/* clang-format on */
+
 static const unsigned char set2_types[] PROGMEM = {
-#define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1) PACK_44((type0), (type1)),
+#define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1)            \
+	PACK_44((type0), (type1)),
 #include <ps2spi/ps2_keyboard_codes.def>
 #undef PS2_KEYBOARD_DEFINE_KEY
 };
@@ -146,7 +152,8 @@ static const struct Sequences
 #include "keyboard_sequences.def"
 #undef DEFINE_SEQUENCE
 } set2_sequences PROGMEM = {
-#define DEFINE_SEQUENCE(name, rep, prefix, suffix) { PACK_323(name##_prefix_length, (rep), name##_suffix_length), prefix suffix },
+#define DEFINE_SEQUENCE(name, rep, prefix, suffix)                                                                     \
+	{ PACK_323(name##_prefix_length, (rep), name##_suffix_length), prefix suffix },
 #define X(byte) (byte),
 #define SEQ_NIL
 #define KEY_CODE
@@ -162,7 +169,7 @@ enum
 #define DEFINE_SEQUENCE(name, rep, prefix, suffix) name = offsetof(struct Sequences, name##_sequence),
 #include "keyboard_sequences.def"
 #undef DEFINE_SEQUENCE
-    SEQUENCE_END
+	SEQUENCE_END
 };
 
 static const struct Selectors
@@ -195,7 +202,8 @@ static const unsigned char key_type_modifiers[] = {
 };
 
 static const unsigned char key_type_masks[] = {
-#define DEFINE_KEY_TYPE(name, modifier, m0, m1, m2, m3, m4, m5, m6, m7, set1_selector, set2_selector) PACK_BITS((m0), (m1), (m2), (m3), (m4), (m5), (m6), (m7)),
+#define DEFINE_KEY_TYPE(name, modifier, m0, m1, m2, m3, m4, m5, m6, m7, set1_selector, set2_selector)                  \
+	PACK_BITS((m0), (m1), (m2), (m3), (m4), (m5), (m6), (m7)),
 #include "keyboard_key_types.def"
 #undef DEFINE_KEY_TYPE
 };
@@ -206,14 +214,16 @@ static const unsigned char key_type_selectors[] = {
 #undef DEFINE_KEY_TYPE
 };
 
-static void insert_scancode_set2(Keyboard *const self, const Ps2KeyboardKeyCode key_code, const unsigned char release, const unsigned char repeat)
+static void insert_scancode_set2(
+	Keyboard *const self, const Ps2KeyboardKeyCode key_code, const unsigned char release, const unsigned char repeat)
 {
 	const unsigned char scancode = pgm_read_byte_near((unsigned short)set2_scancodes + key_code);
 	const unsigned char type_pair = pgm_read_byte_near((unsigned short)set2_types + key_code / 2u);
 	const unsigned char type = (key_code % 2u) ? UNPACK_44_1(type_pair) : UNPACK_44_0(type_pair);
 	const unsigned char mask = key_type_masks[type];
 	const unsigned char modifier_mask = key_type_modifiers[type];
-	const unsigned char bits = ((release | ((self->modifiers | (self->modifiers >> 5)) << 1)) & mask & 0xf) | ((self->modifiers >> 1) & (mask >> 4));
+	const unsigned char bits = ((release | ((self->modifiers | (self->modifiers >> 5)) << 1)) & mask & 0xf) |
+		((self->modifiers >> 1) & (mask >> 4));
 	const unsigned char selector = key_type_selectors[type];
 	const unsigned char offset = pgm_read_byte_near((unsigned short)&set2_selectors + selector + bits);
 	const unsigned char lengths = pgm_read_byte_near((unsigned short)&set2_sequences + offset);
@@ -402,34 +412,38 @@ static unsigned char receive_option_byte_proc(Keyboard *const self, const unsign
 	return 1;
 }
 
-#define PROCEDURES                   \
-	X(send_byte_proc)                \
-	X(send_byte_no_store_proc)       \
-	X(enable_proc)                   \
-	X(set_default_proc)              \
-	X(resend_proc)                   \
-	X(send_buffer_proc)              \
-	X(set_leds_proc)                 \
-	X(set_scancode_set_proc)         \
-	X(set_typematic_rate_delay_proc) \
-	X(receive_option_byte_proc)      \
-	X(reset_proc)                    \
-	X(reset_wait_proc)               \
+#define PROCEDURES                                                                                                     \
+	X(send_byte_proc)                                                                                                  \
+	X(send_byte_no_store_proc)                                                                                         \
+	X(enable_proc)                                                                                                     \
+	X(set_default_proc)                                                                                                \
+	X(resend_proc)                                                                                                     \
+	X(send_buffer_proc)                                                                                                \
+	X(set_leds_proc)                                                                                                   \
+	X(set_scancode_set_proc)                                                                                           \
+	X(set_typematic_rate_delay_proc)                                                                                   \
+	X(receive_option_byte_proc)                                                                                        \
+	X(reset_proc)                                                                                                      \
+	X(reset_wait_proc)                                                                                                 \
 	X(send_scancode_set_proc)
 
 static unsigned char (*const PROGMEM procedures[])(Keyboard *self, unsigned char parameter) = {
 #define X(name) name,
-PROCEDURES
+	PROCEDURES
 #undef X
 };
+
+/* clang-format off */
 
 enum
 {
 #define X(name) name##_index,
-PROCEDURES
+	PROCEDURES
 #undef X
 	end_proc_index
 };
+
+/* clang-format on */
 
 static const unsigned char PROGMEM next_states[] = {
 #define DEFINE_STATE(name, next_state, parameter, procedure, receive) (next_state),
@@ -468,10 +482,12 @@ void keyboard_work(Keyboard *const self, const unsigned char time_delta)
 	{
 		const unsigned char next_state = pgm_read_byte_near((unsigned short)next_states + self->state);
 		const unsigned char parameter = pgm_read_byte_near((unsigned short)parameters + self->state);
-		const unsigned char procedure_offset_receive = pgm_read_byte_near((unsigned short)procedure_offsets + self->state);
+		const unsigned char procedure_offset_receive =
+			pgm_read_byte_near((unsigned short)procedure_offsets + self->state);
 		const unsigned char procedure_offset = UNPACK_71_0(procedure_offset_receive);
 		const unsigned char procedure_receive = UNPACK_71_1(procedure_offset_receive);
-		unsigned char (*const procedure)(Keyboard *, unsigned char) = (unsigned char (*)(Keyboard *, unsigned char))pgm_read_word_near((unsigned short)procedures + procedure_offset);
+		unsigned char (*const procedure)(Keyboard *, unsigned char) = (unsigned char (*)(
+			Keyboard *, unsigned char))pgm_read_word_near((unsigned short)procedures + procedure_offset);
 		self->bat_timer = 0;
 		if (PS2_KEYBOARD_KEY_RESERVED != self->last_typematic_key)
 		{

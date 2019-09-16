@@ -1,3 +1,5 @@
+/* clang-format off */
+
 /*                      Key Name              Type                   Set 1  Set 2 */
 PS2_KEYBOARD_DEFINE_KEY(KEY_RESERVED,         KEY_TYPE_NONE,         0x00,  0x00,
                         KEY_POWER,            KEY_TYPE_E0,           0x5e,  0x37)

@@ -7,9 +7,10 @@
 
 FUSES = {
 	/* 8Mhz Internal RC Oscillator, 4.0v Brown-out Detection */
-	FUSE_SUT_CKSEL0 & FUSE_SUT_CKSEL1 & FUSE_SUT_CKSEL3 & FUSE_SUT_CKSEL4 & FUSE_SUT_CKSEL5 & FUSE_BODEN & FUSE_BODLEVEL,
+	FUSE_SUT_CKSEL0 & FUSE_SUT_CKSEL1 & FUSE_SUT_CKSEL3 & FUSE_SUT_CKSEL4 & FUSE_SUT_CKSEL5 & FUSE_BODEN &
+		FUSE_BODLEVEL,
 	/* Serial Downloading, Watchdog Timer always enabled */
-	FUSE_SPIEN & FUSE_WTDON,
+	FUSE_SPIEN &FUSE_WTDON,
 };
 
 #define KEYBOARD_CLOCK PORTD0
@@ -60,13 +61,15 @@ static void handle_spi(void)
 		}
 		if (offset == length)
 			break;
-		while (!(SPSR & (1u << SPIF)));
+		while (!(SPSR & (1u << SPIF)))
+			;
 	}
 
 	switch (command)
 	{
 	case 0:
-		while (!(SPSR & (1u << SPIF)));
+		while (!(SPSR & (1u << SPIF)))
+			;
 		SPDR = keyboard_get_leds(&keyboard);
 		break;
 	case 1:
@@ -76,20 +79,20 @@ static void handle_spi(void)
 		keyboard_set_key_state(&keyboard, buffer[0], 1);
 		break;
 	case 3:
-		{
-			short delta_x = buffer[0] | (buffer[1] << 7);
-			short delta_y = buffer[2] | (buffer[3] << 7);
-			char delta_z = buffer[4];
-			const unsigned char buttons = buffer[5];
-			if (delta_x & 0x2000)
-				delta_x |= 0xc000;
-			if (delta_y & 0x2000)
-				delta_y |= 0xc000;
-			if (delta_z & 0x40)
-				delta_z |= 0x80;
-			mouse_update(&mouse, delta_x, delta_y, delta_z, buttons);
-		}
-		break;
+	{
+		short delta_x = buffer[0] | (buffer[1] << 7);
+		short delta_y = buffer[2] | (buffer[3] << 7);
+		char delta_z = buffer[4];
+		const unsigned char buttons = buffer[5];
+		if (delta_x & 0x2000)
+			delta_x |= 0xc000;
+		if (delta_y & 0x2000)
+			delta_y |= 0xc000;
+		if (delta_z & 0x40)
+			delta_z |= 0x80;
+		mouse_update(&mouse, delta_x, delta_y, delta_z, buttons);
+	}
+	break;
 	}
 }
 

@@ -16,7 +16,8 @@ unsigned char ps2_can_receive(const unsigned char clock_mask, const unsigned cha
 static void wait_for_tick()
 {
 	TIFR = 1u << OCF2;
-	while (!(TIFR & (1u << OCF2)));
+	while (!(TIFR & (1u << OCF2)))
+		;
 }
 
 static unsigned char send_bit(const unsigned char bit, const unsigned char clock_mask, const unsigned char data_mask)
@@ -47,6 +48,8 @@ static unsigned char send_bit(const unsigned char bit, const unsigned char clock
 	return 1;
 }
 
+/* clang-format off */
+
 /*
  *
  * 0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0
@@ -62,6 +65,8 @@ static unsigned char send_bit(const unsigned char bit, const unsigned char clock
  *    |___________|___________|___________|___________|___________|___________|___________|___________|___________|___________|
  *
  */
+
+/* clang-format on */
 
 unsigned char ps2_send(const unsigned char clock_mask, const unsigned char data_mask, const unsigned char byte)
 {
@@ -114,6 +119,8 @@ static unsigned char receive_bit(const unsigned char clock_mask, const unsigned 
 	return result;
 }
 
+/* clang-format off */
+
 /*
  *
  * 0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0  1  2  3  0
@@ -129,6 +136,8 @@ static unsigned char receive_bit(const unsigned char clock_mask, const unsigned 
  *  ________|___________|___________|___________|___________|___________|___________|___________|___________|___________|      |________
  *
  */
+
+/* clang-format on */
 
 unsigned char ps2_receive(const unsigned char clock_mask, const unsigned char data_mask, unsigned char *const output)
 {
@@ -184,7 +193,7 @@ unsigned char ps2_receive(const unsigned char clock_mask, const unsigned char da
 
 	{
 		unsigned char next_ddrd = DDRD;
-	
+
 		/* line control */
 		next_ddrd |= data_mask;
 		DDRD = next_ddrd;

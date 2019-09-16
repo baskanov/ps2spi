@@ -33,7 +33,7 @@ static void test_pause_key(void)
 		const Ps2MockExpectedCall expected_calls[] = {
 			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
 			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa} , { 1 } },
+			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
 			{ PS2_MOCK_END },
 		};
 		ps2_mock_set_expected_calls(expected_calls);
@@ -622,7 +622,8 @@ static void test_set_leds(void)
 	}
 	if (keyboard_get_leds(&keyboard) != 0x5)
 	{
-		for (;;);
+		for (;;)
+			;
 	}
 	{
 		const Ps2MockExpectedCall expected_calls[] = {

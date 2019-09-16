@@ -1,3 +1,5 @@
+/* clang-format off */
+
 /*              Name                                         Rep  Prefix                                             Suffix                                   */
 DEFINE_SEQUENCE(SEQUENCE_MAKE,                                 1, SEQ_NIL,                                           KEY_CODE                                  )
 DEFINE_SEQUENCE(SEQUENCE_SET2_BREAK,                           0, X(0xf0),                                           KEY_CODE                                  )

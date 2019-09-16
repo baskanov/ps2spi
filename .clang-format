@@ -1,0 +1,16 @@
+---
+AlignAfterOpenBracket: AlwaysBreak
+AlignOperands: false
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBraces: Allman
+ColumnLimit: 120
+Cpp11BracedListStyle: false
+IndentWidth: 4
+SortIncludes: false
+TabWidth: 4
+UseTab: ForContinuationAndIndentation
+
+...

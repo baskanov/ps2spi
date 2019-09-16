@@ -8,7 +8,8 @@ static unsigned char expected_call_index = 0;
 
 static void halt(void)
 {
-	for (;;);
+	for (;;)
+		;
 }
 
 static void report_unexpected_call(void)
@@ -26,7 +27,12 @@ static void report_missing_call(void)
 	halt();
 }
 
-static unsigned char check_call(const unsigned char function, const unsigned char parameter0, const unsigned char parameter1, const unsigned char parameter2, unsigned char *const output_ptr)
+static unsigned char check_call(
+	const unsigned char function,
+	const unsigned char parameter0,
+	const unsigned char parameter1,
+	const unsigned char parameter2,
+	unsigned char *const output_ptr)
 {
 	if (!expected_calls)
 		report_unexpected_call();

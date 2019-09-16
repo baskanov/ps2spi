@@ -41,9 +41,13 @@ void mouse_init(Mouse *const self, const unsigned char clock_mask, const unsigne
 	reset(self);
 }
 
+/* clang-format off */
+
 #define PACK_71(a, b) ((a) | ((b) << 7) | ((((a) > 0x7f) || ((b) > 0x1)) ? 0x100 : 0))
 #define UNPACK_71_0(a) ((unsigned char)((a) & 0x7f))
 #define UNPACK_71_1(a) ((unsigned char)((a) >> 7))
+
+/* clang-format on */
 
 static unsigned char send_packet_byte_proc(Mouse *const self, const unsigned char parameter)
 {
@@ -84,11 +88,12 @@ static unsigned char send_status_proc(Mouse *const self, const unsigned char par
 	if (!send_byte_proc(self, 0xfa))
 		return 0;
 
-	self->packet[0] = (self->mode << 6u) | (self->enabled << 5u) | (self->scaling << 4u) | ((self->buttons << 2u) & 0x4) | ((self->buttons >> 1u) & 0x3);
+	self->packet[0] = (self->mode << 6u) | (self->enabled << 5u) | (self->scaling << 4u) |
+		((self->buttons << 2u) & 0x4) | ((self->buttons >> 1u) & 0x3);
 	self->packet[1] = self->resolution;
 	self->packet[2] = self->sample_rate;
 	self->packet_size = 3;
-	
+
 	self->current_packet_offset = 0;
 
 	return 1;
@@ -266,38 +271,38 @@ static unsigned char no_op_proc(Mouse *const self, const unsigned char parameter
 	return 1;
 }
 
-#define PROCEDURES               \
-	X(send_byte_proc)            \
-	X(set_scaling_proc)          \
-	X(set_resolution_proc)       \
-	X(send_status_proc)          \
-	X(set_mode_proc)             \
-	X(send_movement_packet_proc) \
-	X(set_echo_mode_proc)        \
-	X(send_id_proc)              \
-	X(set_sample_rate_proc)      \
-	X(set_enabled_proc)          \
-	X(set_defaults_proc)         \
-	X(resend_proc)               \
-	X(reset_proc)                \
-	X(idle_proc)                 \
-	X(send_packet_byte_proc)     \
-	X(send_completion_code_proc) \
-	X(echo_proc)                 \
+#define PROCEDURES                                                                                                     \
+	X(send_byte_proc)                                                                                                  \
+	X(set_scaling_proc)                                                                                                \
+	X(set_resolution_proc)                                                                                             \
+	X(send_status_proc)                                                                                                \
+	X(set_mode_proc)                                                                                                   \
+	X(send_movement_packet_proc)                                                                                       \
+	X(set_echo_mode_proc)                                                                                              \
+	X(send_id_proc)                                                                                                    \
+	X(set_sample_rate_proc)                                                                                            \
+	X(set_enabled_proc)                                                                                                \
+	X(set_defaults_proc)                                                                                               \
+	X(resend_proc)                                                                                                     \
+	X(reset_proc)                                                                                                      \
+	X(idle_proc)                                                                                                       \
+	X(send_packet_byte_proc)                                                                                           \
+	X(send_completion_code_proc)                                                                                       \
+	X(echo_proc)                                                                                                       \
 	X(no_op_proc)
 
 static unsigned char (*const PROGMEM procedures[])(Mouse *self, unsigned char parameter) = {
 #define X(name) name,
-PROCEDURES
+	PROCEDURES
 #undef X
 };
 
 enum
 {
 #define X(name) name##_index,
-PROCEDURES
+	PROCEDURES
 #undef X
-	end_proc_index
+		end_proc_index
 };
 
 static const unsigned char PROGMEM next_states[] = {
@@ -319,19 +324,9 @@ static const unsigned char PROGMEM procedure_offsets[] = {
 };
 
 static const unsigned char magic_sequences[] = {
-	0xf3,
-	0xc8,
-	0xf3,
-	0x64,
-	0xf3,
-	0x50,
+	0xf3, 0xc8, 0xf3, 0x64, 0xf3, 0x50,
 
-	0xf3,
-	0xc8,
-	0xf3,
-	0xc8,
-	0xf3,
-	0x50,
+	0xf3, 0xc8, 0xf3, 0xc8, 0xf3, 0x50,
 };
 
 void mouse_work(Mouse *const self, const unsigned char time_delta)
@@ -341,7 +336,8 @@ void mouse_work(Mouse *const self, const unsigned char time_delta)
 	const unsigned char procedure_offset_receive = pgm_read_byte_near((unsigned short)procedure_offsets + self->state);
 	const unsigned char procedure_offset = UNPACK_71_0(procedure_offset_receive);
 	const unsigned char procedure_receive = UNPACK_71_1(procedure_offset_receive);
-	unsigned char (*const procedure)(Mouse *, unsigned char) = (unsigned char (*)(Mouse *, unsigned char))pgm_read_word_near((unsigned short)procedures + procedure_offset);
+	unsigned char (*const procedure)(Mouse *, unsigned char) =
+		(unsigned char (*)(Mouse *, unsigned char))pgm_read_word_near((unsigned short)procedures + procedure_offset);
 	if (ps2_can_receive(self->clock_mask, self->data_mask))
 	{
 		unsigned char byte;
@@ -404,7 +400,8 @@ void mouse_work(Mouse *const self, const unsigned char time_delta)
 	}
 }
 
-void mouse_update(Mouse *const self, const short delta_x, const short delta_y, const char delta_z, const unsigned char buttons)
+void mouse_update(
+	Mouse *const self, const short delta_x, const short delta_y, const char delta_z, const unsigned char buttons)
 {
 	self->delta_x += delta_x;
 	self->delta_y += delta_y;

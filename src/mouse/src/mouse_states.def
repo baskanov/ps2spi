@@ -1,3 +1,5 @@
+/* clang-format off */
+
 /*           Name                                Next State                          Parm Proc Receive                */
 DEFINE_STATE(STATE_SET_SCALING_1_1,              STATE_IDLE,                         0x00, set_scaling_proc,          0) /* (0xe6) */
 DEFINE_STATE(STATE_SET_SCALING_2_1,              STATE_IDLE,                         0x01, set_scaling_proc,          0) /* (0xe7) */
