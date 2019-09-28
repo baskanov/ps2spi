@@ -1,0 +1,17 @@
+name: AVR CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install prerequisites
+      run: sudo apt install gcc-avr avr-libc
+    - name: Configure
+      run: mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=MinSizeRel
+    - name: Build
+      run: cmake --build build
