@@ -61,7 +61,6 @@ static void set_default(Keyboard *const self)
 	self->typematic_delay = MS_TO_TICKS(500);
 	self->typematic_period = MS_TO_TICKS(92);
 	self->last_typematic_key = PS2_KEYBOARD_KEY_RESERVED;
-	/* TODO: set default key types (scancode set 3) */
 }
 
 static void reset(Keyboard *const self)
