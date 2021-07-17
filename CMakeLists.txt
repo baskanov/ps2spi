@@ -6,7 +6,7 @@ else()
     cmake_policy(VERSION 3.10)
 endif()
 
-set(CMAKE_TOOLCHAIN_FILE avr.cmake)
+set(CMAKE_TOOLCHAIN_FILE cmake/avr.cmake)
 
 project(Ps2Spi VERSION 0.1.0 LANGUAGES C)
 
