@@ -91,8 +91,8 @@ static void handle_spi(void)
 		if (delta_z & 0x40)
 			delta_z |= 0x80;
 		mouse_update(&mouse, delta_x, delta_y, delta_z, buttons);
+		break;
 	}
-	break;
 	}
 }
 
