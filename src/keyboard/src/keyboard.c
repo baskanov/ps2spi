@@ -537,8 +537,7 @@ void keyboard_work(Keyboard *const self, const unsigned char time_delta)
 
 void keyboard_set_key_state(Keyboard *const self, const Ps2KeyboardKeyCode key_code, const unsigned char release)
 {
-	if (key_code < PS2_KEYBOARD_KEY_COUNT)
-		insert_scancode_set2(self, key_code, release, 0);
+	insert_scancode_set2(self, key_code, release, 0);
 }
 
 unsigned char keyboard_get_leds(Keyboard *const self)
