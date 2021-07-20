@@ -36,6 +36,7 @@ static const unsigned char command_lengths[] = {
 static void handle_spi(void)
 {
 	unsigned char command = 0xff;
+	unsigned char release = 1;
 	unsigned char length = 1;
 	unsigned char offset = 0;
 	unsigned char buffer[6];
@@ -73,10 +74,11 @@ static void handle_spi(void)
 		SPDR = keyboard_get_leds(&keyboard);
 		break;
 	case 1:
-		keyboard_set_key_state(&keyboard, buffer[0], 0);
-		break;
+		release = 0;
+		/* falls through */
 	case 2:
-		keyboard_set_key_state(&keyboard, buffer[0], 1);
+		if (buffer[0] < PS2_KEYBOARD_KEY_COUNT)
+			keyboard_set_key_state(&keyboard, buffer[0], release);
 		break;
 	case 3:
 	{
