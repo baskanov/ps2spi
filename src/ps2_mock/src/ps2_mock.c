@@ -14,17 +14,17 @@ static void halt(void)
 
 static void report_unexpected_call(void)
 {
-	halt();
+	ps2_mock_report_failure();
 }
 
 static void report_unexpected_parameter(void)
 {
-	halt();
+	ps2_mock_report_failure();
 }
 
 static void report_missing_call(void)
 {
-	halt();
+	ps2_mock_report_failure();
 }
 
 static unsigned char check_call(
@@ -89,4 +89,14 @@ void ps2_mock_check_remainder(void)
 {
 	if (PS2_MOCK_END != expected_calls[expected_call_index].function)
 		report_missing_call();
+}
+
+void ps2_mock_report_failure(void)
+{
+	halt();
+}
+
+void ps2_mock_report_success(void)
+{
+	halt();
 }

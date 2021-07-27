@@ -19,5 +19,7 @@ typedef struct
 
 void ps2_mock_set_expected_calls(const Ps2MockExpectedCall *calls);
 void ps2_mock_check_remainder(void);
+void ps2_mock_report_failure(void);
+void ps2_mock_report_success(void);
 
 #endif /* PS2_MOCK_H */
