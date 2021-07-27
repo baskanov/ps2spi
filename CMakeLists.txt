@@ -10,6 +10,8 @@ set(CMAKE_TOOLCHAIN_FILE cmake/avr.cmake)
 
 project(Ps2Spi VERSION 0.1.0 LANGUAGES C)
 
+enable_testing()
+
 set(MCU atmega8a)
 set(TEST_MCU atmega16a)
 

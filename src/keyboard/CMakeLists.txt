@@ -14,3 +14,16 @@ target_compile_features(keyboard_test PRIVATE c_std_90)
 set_target_properties(keyboard_test PROPERTIES LINK_FLAGS -mmcu=${TEST_MCU})
 target_include_directories(keyboard_test PRIVATE include)
 target_link_libraries(keyboard_test PRIVATE ps2spi_interface ps2_mock)
+
+add_test(
+    keyboard_test
+    avr-gdb
+    --batch
+    --command
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ps2_mock/test.gdb
+    ${CMAKE_CURRENT_BINARY_DIR}/keyboard_test
+)
+set_tests_properties(keyboard_test PROPERTIES
+    PASS_REGULAR_EXPRESSION "TEST_PASSED"
+    FAIL_REGULAR_EXPRESSION "TEST_FAILED"
+)

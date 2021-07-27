@@ -254,5 +254,5 @@ int main(void)
 	test_movement();
 	test_echo();
 
-	return EXIT_SUCCESS;
+	ps2_mock_report_success();
 }

@@ -715,5 +715,5 @@ int main(void)
 	test_set_leds();
 	test_set_typematic_rate_delay();
 
-	return EXIT_SUCCESS;
+	ps2_mock_report_success();
 }
