@@ -29,6 +29,7 @@ static void reset(Mouse *const self)
 	self->delta_y = 0;
 	self->delta_z = 0;
 	self->buttons = 0;
+	self->pending = 0;
 	self->state = STATE_SEND_COMPLETION_CODE;
 	self->echo = 0;
 	set_defaults(self);
