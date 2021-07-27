@@ -10,8 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install prerequisites
-      run: sudo apt install gcc-avr avr-libc
+      run: sudo apt install gcc-avr avr-libc gdb-avr
     - name: Configure
       run: mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=MinSizeRel
     - name: Build
       run: cmake --build build
+    - name: Run tests
+      run: cd build && ctest
