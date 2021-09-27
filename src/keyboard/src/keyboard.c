@@ -153,7 +153,7 @@ static const struct Sequences
 } set2_sequences PROGMEM = {
 #define DEFINE_SEQUENCE(name, rep, prefix, suffix)                                                                     \
 	{ PACK_323(name##_prefix_length, (rep), name##_suffix_length), prefix suffix },
-#define X(byte) (byte),
+#define X(byte) (0x##byte),
 #define SEQ_NIL
 #define KEY_CODE
 #include "keyboard_sequences.def"
