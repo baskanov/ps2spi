@@ -25,22 +25,27 @@ static void test_bat(void)
 	}
 }
 
+static void init(Keyboard *keyboard)
+{
+	const Ps2MockExpectedCall expected_calls[] = {
+		{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
+		{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
+		{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
+		{ PS2_MOCK_END },
+	};
+
+	keyboard_init(keyboard, 0x1, 0x2);
+
+	ps2_mock_set_expected_calls(expected_calls);
+	keyboard_work(keyboard, 120);
+	keyboard_work(keyboard, 255);
+	ps2_mock_check_remainder();
+}
+
 static void test_pause_key(void)
 {
 	Keyboard keyboard;
-	keyboard_init(&keyboard, 0x1, 0x2);
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 120);
-		keyboard_work(&keyboard, 255);
-		ps2_mock_check_remainder();
-	}
+	init(&keyboard);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_PAUSE, 0);
 	{
 		const Ps2MockExpectedCall expected_calls[] = {
@@ -154,19 +159,7 @@ static void test_pause_key(void)
 static void test_up_key_numlock_on(void)
 {
 	Keyboard keyboard;
-	keyboard_init(&keyboard, 0x1, 0x2);
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 120);
-		keyboard_work(&keyboard, 255);
-		ps2_mock_check_remainder();
-	}
+	init(&keyboard);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_NUMLOCK, 0);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_NUMLOCK, 1);
 	{
@@ -418,19 +411,7 @@ static void test_up_key_repeat(void)
 static void test_up_key_numlock_on_repeat(void)
 {
 	Keyboard keyboard;
-	keyboard_init(&keyboard, 0x1, 0x2);
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 120);
-		keyboard_work(&keyboard, 255);
-		ps2_mock_check_remainder();
-	}
+	init(&keyboard);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_NUMLOCK, 0);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_NUMLOCK, 1);
 	{
@@ -565,19 +546,7 @@ static void test_up_key_numlock_on_repeat(void)
 static void test_set_leds(void)
 {
 	Keyboard keyboard;
-	keyboard_init(&keyboard, 0x1, 0x2);
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 120);
-		keyboard_work(&keyboard, 255);
-		ps2_mock_check_remainder();
-	}
+	init(&keyboard);
 	{
 		const Ps2MockExpectedCall expected_calls[] = {
 			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 1 } },
@@ -639,19 +608,7 @@ static void test_set_leds(void)
 static void test_set_typematic_rate_delay(void)
 {
 	Keyboard keyboard;
-	keyboard_init(&keyboard, 0x1, 0x2);
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 1 } },
-			{ PS2_MOCK_SEND, { 0x1, 0x2, 0xaa }, { 1 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 120);
-		keyboard_work(&keyboard, 255);
-		ps2_mock_check_remainder();
-	}
+	init(&keyboard);
 	{
 		const Ps2MockExpectedCall expected_calls[] = {
 			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 1 } },
