@@ -84,6 +84,18 @@ static void check_output(Keyboard *keyboard, const unsigned char *expected_data,
 	}
 }
 
+static void delay(Keyboard *keyboard, const unsigned char ticks)
+{
+	const Ps2MockExpectedCall expected_calls[] = {
+		{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
+		{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 0 } },
+		{ PS2_MOCK_END },
+	};
+	ps2_mock_set_expected_calls(expected_calls);
+	keyboard_work(keyboard, ticks);
+	ps2_mock_check_remainder();
+}
+
 static void test_pause_key(void)
 {
 	const unsigned char make_expected[] = {
@@ -127,16 +139,7 @@ static void test_up_key_repeat(void)
 	init(&keyboard);
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_UP, 0);
 	check_output(&keyboard, up_expected, sizeof(up_expected));
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 130);
-		ps2_mock_check_remainder();
-	}
+	delay(&keyboard, 130);
 	check_output(&keyboard, up_expected, sizeof(up_expected));
 }
 
@@ -164,16 +167,7 @@ static void test_up_key_numlock_on_repeat(void)
 	check_output(&keyboard, num_lock_expected, sizeof(num_lock_expected));
 	keyboard_set_key_state(&keyboard, PS2_KEYBOARD_KEY_UP, 0);
 	check_output(&keyboard, up_expected, sizeof(up_expected));
-	{
-		const Ps2MockExpectedCall expected_calls[] = {
-			{ PS2_MOCK_CAN_RECEIVE, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_CAN_SEND, { 0x1, 0x2 }, { 0 } },
-			{ PS2_MOCK_END },
-		};
-		ps2_mock_set_expected_calls(expected_calls);
-		keyboard_work(&keyboard, 130);
-		ps2_mock_check_remainder();
-	}
+	delay(&keyboard, 130);
 	check_output(&keyboard, repeat_expected, sizeof(repeat_expected));
 }
 
