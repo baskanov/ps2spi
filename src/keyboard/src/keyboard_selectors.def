@@ -11,8 +11,31 @@
 /*    ALRN     */
 
 /*                          Make                                          Break                                           */
+DEFINE_SELECTOR(SELECTOR_SET1_NORMAL,                                                                                      \
+/*                       */ X(SEQUENCE_MAKE)                              X(SEQUENCE_SET1_BREAK)                           \
+)
 DEFINE_SELECTOR(SELECTOR_SET2_NORMAL,                                                                                      \
 /*                       */ X(SEQUENCE_MAKE)                              X(SEQUENCE_SET2_BREAK)                           \
+)
+DEFINE_SELECTOR(SELECTOR_SET1_E0_GRAY_SLASH,                                                                               \
+/*                       */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* LShift                */ X(SEQUENCE_SET1_E0_LEFT_UNSHIFT_MAKE)         X(SEQUENCE_SET1_E0_LEFT_SHIFT_BREAK)             \
+/* RShift                */ X(SEQUENCE_SET1_E0_RIGHT_UNSHIFT_MAKE)        X(SEQUENCE_SET1_E0_RIGHT_SHIFT_BREAK)            \
+/* LShift+RShift         */ X(SEQUENCE_SET1_E0_LEFT_RIGHT_UNSHIFT_MAKE)   X(SEQUENCE_SET1_E0_LEFT_RIGHT_SHIFT_BREAK)       \
+/* NumLock               */ X(SEQUENCE_SET1_E0_LEFT_SHIFT_MAKE)           X(SEQUENCE_SET1_E0_LEFT_UNSHIFT_BREAK)           \
+/* LShift+NumLock        */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* RShift+NumLock        */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* LShift+RShift+NumLock */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+)
+DEFINE_SELECTOR(SELECTOR_SET1_E0_GRAY_SLASH,                                                                               \
+/*                       */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* LShift                */ X(SEQUENCE_SET1_E0_LEFT_UNSHIFT_MAKE)         X(SEQUENCE_SET1_E0_LEFT_SHIFT_BREAK)             \
+/* RShift                */ X(SEQUENCE_SET1_E0_RIGHT_UNSHIFT_MAKE)        X(SEQUENCE_SET1_E0_RIGHT_SHIFT_BREAK)            \
+/* LShift+RShift         */ X(SEQUENCE_SET1_E0_LEFT_RIGHT_UNSHIFT_MAKE)   X(SEQUENCE_SET1_E0_LEFT_RIGHT_SHIFT_BREAK)       \
+/* NumLock               */ X(SEQUENCE_SET1_E0_LEFT_SHIFT_MAKE)           X(SEQUENCE_SET1_E0_LEFT_UNSHIFT_BREAK)           \
+/* LShift+NumLock        */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* RShift+NumLock        */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
+/* LShift+RShift+NumLock */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET1_E0_BREAK)                        \
 )
 DEFINE_SELECTOR(SELECTOR_SET2_E0_GRAY_SLASH,                                                                               \
 /*                       */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET2_E0_BREAK)                        \
@@ -24,6 +47,16 @@ DEFINE_SELECTOR(SELECTOR_SET2_E0_GRAY_SLASH,                                    
 /* RShift+NumLock        */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET2_E0_BREAK)                        \
 /* LShift+RShift+NumLock */ X(SEQUENCE_E0_MAKE)                           X(SEQUENCE_SET2_E0_BREAK)                        \
 )
+DEFINE_SELECTOR(SELECTOR_SET1_PRINT_SCREEN,                                                                                \
+/*                       */ X(SEQUENCE_SET1_LEFT_SHIFT_PRINT_SCREEN_MAKE) X(SEQUENCE_SET1_LEFT_UNSHIFT_PRINT_SCREEN_BREAK) \
+/* Ctrl                  */ X(SEQUENCE_SET1_PRINT_SCREEN_MAKE)            X(SEQUENCE_SET1_PRINT_SCREEN_BREAK)              \
+/* Alt                   */ X(SEQUENCE_SET1_SYS_RQ_MAKE)                  X(SEQUENCE_SET1_SYS_RQ_BREAK)                    \
+/* Ctrl+Alt              */ X(SEQUENCE_SET1_SYS_RQ_MAKE)                  X(SEQUENCE_SET1_SYS_RQ_BREAK)                    \
+/* Shift                 */ X(SEQUENCE_SET1_PRINT_SCREEN_MAKE)            X(SEQUENCE_SET1_PRINT_SCREEN_BREAK)              \
+/* Shift+Ctrl            */ X(SEQUENCE_SET1_PRINT_SCREEN_MAKE)            X(SEQUENCE_SET1_PRINT_SCREEN_BREAK)              \
+/* Shift+Alt             */ X(SEQUENCE_SET1_SYS_RQ_MAKE)                  X(SEQUENCE_SET1_SYS_RQ_BREAK)                    \
+/* Shift+Ctrl+Alt        */ X(SEQUENCE_SET1_SYS_RQ_MAKE)                  X(SEQUENCE_SET1_SYS_RQ_BREAK)                    \
+)
 DEFINE_SELECTOR(SELECTOR_SET2_PRINT_SCREEN,                                                                                \
 /*                       */ X(SEQUENCE_SET2_LEFT_SHIFT_PRINT_SCREEN_MAKE) X(SEQUENCE_SET2_LEFT_UNSHIFT_PRINT_SCREEN_BREAK) \
 /* Ctrl                  */ X(SEQUENCE_SET2_PRINT_SCREEN_MAKE)            X(SEQUENCE_SET2_PRINT_SCREEN_BREAK)              \
@@ -33,6 +66,10 @@ DEFINE_SELECTOR(SELECTOR_SET2_PRINT_SCREEN,                                     
 /* Shift+Ctrl            */ X(SEQUENCE_SET2_PRINT_SCREEN_MAKE)            X(SEQUENCE_SET2_PRINT_SCREEN_BREAK)              \
 /* Shift+Alt             */ X(SEQUENCE_SET2_SYS_RQ_MAKE)                  X(SEQUENCE_SET2_SYS_RQ_BREAK)                    \
 /* Shift+Ctrl+Alt        */ X(SEQUENCE_SET2_SYS_RQ_MAKE)                  X(SEQUENCE_SET2_SYS_RQ_BREAK)                    \
+)
+DEFINE_SELECTOR(SELECTOR_SET1_PAUSE,                                                                                       \
+/*                       */ X(SEQUENCE_SET1_PAUSE_MAKE)                   X(SEQUENCE_EMPTY)                                \
+/* Ctrl                  */ X(SEQUENCE_SET1_BREAK_MAKE)                   X(SEQUENCE_EMPTY)                                \
 )
 DEFINE_SELECTOR(SELECTOR_SET2_PAUSE,                                                                                       \
 /*                       */ X(SEQUENCE_SET2_PAUSE_MAKE)                   X(SEQUENCE_EMPTY)                                \

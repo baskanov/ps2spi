@@ -84,9 +84,9 @@ void keyboard_init(Keyboard *const self, const unsigned char clock_mask, const u
 	reset(self);
 }
 
-static const unsigned char set2_scancodes[] PROGMEM = {
+static const unsigned char scancodes[][2] PROGMEM = {
 #define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1)            \
-	(set2_code0), (set2_code1),
+	(set1_code0), (set2_code0), (set1_code1), (set2_code1),
 #include <ps2spi/ps2_keyboard_codes.def>
 #undef PS2_KEYBOARD_DEFINE_KEY
 };
@@ -110,7 +110,7 @@ static const unsigned char set2_scancodes[] PROGMEM = {
 
 /* clang-format on */
 
-static const unsigned char set2_types[] PROGMEM = {
+static const unsigned char types[] PROGMEM = {
 #define PS2_KEYBOARD_DEFINE_KEY(name0, type0, set1_code0, set2_code0, name1, type1, set1_code1, set2_code1)            \
 	PACK_44((type0), (type1)),
 #include <ps2spi/ps2_keyboard_codes.def>
@@ -150,7 +150,7 @@ static const struct Sequences
 #define DEFINE_SEQUENCE(name, rep, prefix, suffix) unsigned char name##_sequence[name##_length];
 #include "keyboard_sequences.def"
 #undef DEFINE_SEQUENCE
-} set2_sequences PROGMEM = {
+} sequences PROGMEM = {
 #define DEFINE_SEQUENCE(name, rep, prefix, suffix)                                                                     \
 	{ PACK_323(name##_prefix_length, (rep), name##_suffix_length), prefix suffix },
 #define X(byte) (0x##byte),
@@ -178,7 +178,7 @@ static const struct Selectors
 #include "keyboard_selectors.def"
 #undef X
 #undef DEFINE_SELECTOR
-} set2_selectors PROGMEM = {
+} selectors PROGMEM = {
 #define DEFINE_SELECTOR(name, seqs) { seqs },
 #define X(seq) (seq),
 #include "keyboard_selectors.def"
@@ -207,25 +207,25 @@ static const unsigned char key_type_masks[] = {
 #undef DEFINE_KEY_TYPE
 };
 
-static const unsigned char key_type_selectors[] = {
-#define DEFINE_KEY_TYPE(name, modifier, m0, m1, m2, m3, m4, m5, m6, m7, set1_selector, set2_selector) (set2_selector),
+static const unsigned char key_type_selectors[][2] = {
+#define DEFINE_KEY_TYPE(name, modifier, m0, m1, m2, m3, m4, m5, m6, m7, set1_selector, set2_selector) (set1_selector), (set2_selector),
 #include "keyboard_key_types.def"
 #undef DEFINE_KEY_TYPE
 };
 
-static void insert_scancode_set2(
+static void insert_scancode(
 	Keyboard *const self, const Ps2KeyboardKeyCode key_code, const unsigned char release, const unsigned char repeat)
 {
-	const unsigned char scancode = pgm_read_byte_near((unsigned short)set2_scancodes + key_code);
-	const unsigned char type_pair = pgm_read_byte_near((unsigned short)set2_types + key_code / 2u);
+	const unsigned char scancode = pgm_read_byte_near((unsigned short)scancodes + key_code * 2u + self->scancode_set - 1u);
+	const unsigned char type_pair = pgm_read_byte_near((unsigned short)types + key_code / 2u);
 	const unsigned char type = (key_code % 2u) ? UNPACK_44_1(type_pair) : UNPACK_44_0(type_pair);
 	const unsigned char mask = key_type_masks[type];
 	const unsigned char modifier_mask = key_type_modifiers[type];
 	const unsigned char bits = ((release | ((self->modifiers | (self->modifiers >> 5)) << 1)) & mask & 0xf) |
 		((self->modifiers >> 1) & (mask >> 4));
-	const unsigned char selector = key_type_selectors[type];
-	const unsigned char offset = pgm_read_byte_near((unsigned short)&set2_selectors + selector + bits);
-	const unsigned char lengths = pgm_read_byte_near((unsigned short)&set2_sequences + offset);
+	const unsigned char selector = key_type_selectors[type][self->scancode_set - 1u];
+	const unsigned char offset = pgm_read_byte_near((unsigned short)&selectors + selector + bits);
+	const unsigned char lengths = pgm_read_byte_near((unsigned short)&sequences + offset);
 	const unsigned char prefix_length = UNPACK_323_0(lengths);
 	const unsigned char repeat_length = UNPACK_323_1(lengths);
 	const unsigned char suffix_length = UNPACK_323_2(lengths);
@@ -233,7 +233,7 @@ static void insert_scancode_set2(
 	const unsigned char free_space = get_free_space(self);
 	if (free_space > total_length)
 	{
-		unsigned short address = (unsigned short)&set2_sequences + offset;
+		unsigned short address = (unsigned short)&sequences + offset;
 		unsigned char i = total_length;
 		if (repeat)
 		{
@@ -246,6 +246,8 @@ static void insert_scancode_set2(
 			if (suffix_length == i && scancode)
 			{
 				byte = scancode;
+				if (release && self->scancode_set == 1)
+					byte |= 0x80;
 			}
 			else
 			{
@@ -347,7 +349,7 @@ static unsigned char set_scancode_set_proc(Keyboard *const self, const unsigned 
 		self->state = STATE_SET_SCANCODE_SET_SEND_CURRENT;
 		return 0;
 	}
-	else if (self->option_byte <= 2)
+	else if (self->option_byte <= 1)
 	{
 		clear(self);
 		self->scancode_set = self->option_byte;
@@ -494,7 +496,7 @@ void keyboard_work(Keyboard *const self, const unsigned char time_delta)
 			{
 				self->typematic_timer += self->typematic_period;
 				/* TODO: do not insert scancode if transmission is inhibited */
-				insert_scancode_set2(self, self->last_typematic_key, 0, 1);
+				insert_scancode(self, self->last_typematic_key, 0, 1);
 			}
 			self->typematic_timer -= time_delta;
 		}
@@ -537,7 +539,7 @@ void keyboard_work(Keyboard *const self, const unsigned char time_delta)
 
 void keyboard_set_key_state(Keyboard *const self, const Ps2KeyboardKeyCode key_code, const unsigned char release)
 {
-	insert_scancode_set2(self, key_code, release, 0);
+	insert_scancode(self, key_code, release, 0);
 }
 
 unsigned char keyboard_get_leds(Keyboard *const self)
